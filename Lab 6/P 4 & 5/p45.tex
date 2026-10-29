@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\section*{Exercise 4}
+
+\subsection*{1. Hypotheses}
+\begin{itemize}
+    \item \textbf{Null hypothesis ($H_0$):} $\mu_B = \mu_A$ (or $\mu_B \le \mu_A$, meaning Model B does not improve true prediction accuracy compared to Model A).
+    \item \textbf{Alternative hypothesis ($H_1$):} $\mu_B > \mu_A$ (meaning Model B has a higher true prediction accuracy than Model A).
+\end{itemize}
+
+\subsection*{2. Decision at $\alpha = 0.05$}
+Yes, the data scientist should claim that Model B is significantly better than Model A. 
+
+\textbf{Explanation:} Since the $p$-value ($0.04$) is less than the significance level $\alpha = 0.05$ ($0.04 < 0.05$), we reject the null hypothesis $H_0$ in favor of the alternative hypothesis $H_1$. This indicates that observing an improvement at least this large by random chance alone is unlikely under $H_0$, providing statistically significant evidence at the $5\%$ level that Model B improves accuracy.
+
+\subsection*{3. Decision at $\alpha = 0.01$}
+% Context: If \alpha was set to 0.01 before examining the results, how would it affect the decision? Explain.
+If the significance level were set to $\alpha = 0.01$, the decision would change: we would \textbf{fail to reject $H_0$}.
+
+\textbf{Explanation:} Because the $p$-value ($0.04$) is greater than the stricter significance level $\alpha = 0.01$ ($0.04 > 0.01$), the test result is no longer statistically significant at the $1\%$ level. There would not be sufficient statistical evidence at the $1\%$ significance level to claim that Model B performs better than Model A.
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{Exercise 5}
+
+\subsection*{Problem 1}
+\noindent\textbf{Problematic statement:} ``Because the observed average loading time was lower after optimization, we selected a one-sided test.''\\
+\textbf{Issue:} The choice between a one-sided and a two-sided test must be made \emph{before} looking at the sample data, based on the research question or prior claim. Selecting a one-sided test after observing the direction of the sample data (post-hoc) invalidates the test's Type I error rate.\\
+\textbf{Correction:} ``Because our goal is to test the web engineer's prior claim that the optimization reduces average page-loading time, we specified a one-sided test before collecting and examining the data.''
+
+\subsection*{Problem 2}
+\noindent\textbf{Problematic statement:} ``The p-value of 0.07 means that there is a 7\% probability that the optimization has no effect.''\\
+\textbf{Issue:} The $p$-value is not the probability that the null hypothesis ($H_0$) is true. Instead, it is the probability of observing a sample result at least as extreme as the one obtained, \emph{assuming} that the null hypothesis ($H_0$) is true.\\
+\textbf{Correction:} ``The p-value of 0.07 means that if the optimization truly had no effect on average page-loading time ($H_0$ were true), there would be a 7\% probability of observing a sample reduction in average loading time at least as large as the one we observed.''
+
+\subsection*{Problem 3}
+\noindent\textbf{Problematic statement:} ``Because $p > 0.05$, we accept $H_0$ and conclude that the optimization does not improve loading performance.''\\
+\textbf{Issue:} In hypothesis testing, we never ``accept $H_0$'' or conclude that $H_0$ is proven true. A $p$-value greater than $\alpha$ only means that we lack sufficient evidence to reject $H_0$.\\
+\textbf{Correction:} ``Because $p = 0.07 > 0.05$, we fail to reject $H_0$ at the 5\% significance level. There is insufficient statistical evidence at the 5\% level to conclude that the optimization reduces average page-loading time.''
+
+\subsection*{Problem 4}
+\noindent\textbf{Problematic statement:} ``Therefore, it should not be deployed.''\\
+\textbf{Issue:} A decision should not be based solely on whether a $p$-value crosses an arbitrary $\alpha = 0.05$ cutoff (especially with a borderline $p$-value of $0.07$). It ignores practical significance (effect size and confidence interval), the statistical power of the test, and the cost-benefit trade-off of deployment.\\
+\textbf{Correction:} ``While the reduction is not statistically significant at the 5\% level ($p = 0.07$), the decision to deploy should also consider the estimated effect size (confidence interval), the statistical power of the study, and the engineering cost versus potential performance benefit.''
+
+\end{document}
+
